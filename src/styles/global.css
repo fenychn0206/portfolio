@@ -1,43 +1,141 @@
 @import "tailwindcss";
 
 @plugin "@iconify/tailwind4" {
-	prefixes: lucide, devicon;
+	prefixes: mdi;
 }
 
 @theme {
-	--color-primary: var(--primary-color);
-	--color-secondary: var(--secondary-color);
-	--color-weak: var(--weak-color);
-	--color-background: var(--background-color);
-	--color-selection: var(--selection-color);
+	--color-primary: var(--ink);
+	--color-secondary: var(--ink-soft);
+	--color-weak: var(--rule);
+	--color-background: var(--paper);
+	--color-selection: var(--selection);
+
+	--font-ui:
+		"Source Sans Pro", "Roboto", "Helvetica", "Helvetica Neue", "Source Han Sans SC",
+		"Source Han Sans TC", "PingFang SC", "PingFang HK", "PingFang TC", sans-serif;
+	--font-header:
+		"HiraMinProN-W6", "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif TC",
+		serif;
 }
 
+/* Palette adapted from astro-theme-typography: ink on paper, no pure black. */
 :root {
-	--primary-color: #0e0e0e;
-	--secondary-color: #505050;
-	--background-color: #ffffff;
-	--weak-color: #e0e0e0;
-	--selection-color: #adadadc3;
+	--ink: #2e405b;
+	--ink-soft: #5b6b80;
+	--paper: #ffffff;
+	--rule: #dbe0e7;
+	--selection: #2e405b2e;
+	--shadow: #0000000a;
+	--code-ink: #c7254e;
+	--code-paper: #f9f2f4;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--primary-color: #dddddd;
-		--secondary-color: #aaaaaa;
-		--background-color: #0e0e0e;
-		--weak-color: #5d5d5d;
-		--selection-color: #adadadc3;
+		--ink: #ffffff;
+		--ink-soft: #a5adb8;
+		--paper: #232222;
+		--rule: #3b3a3a;
+		--selection: #ffffff2e;
+		--shadow: #ffffff0a;
+		--code-ink: #ff9ab4;
+		--code-paper: #382c30;
 	}
 }
 
 html {
-	font-family: "Inter", sans-serif;
-	color: var(--primary-color);
-	background-color: var(--background-color);
+	font-family: var(--font-ui);
+	-webkit-font-smoothing: antialiased;
+	color: var(--ink);
+	background-color: var(--paper);
+	/* 7px paper grid, borrowing the theme's texture */
+	background-image:
+		linear-gradient(to right, var(--shadow) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--shadow) 1px, transparent 1px);
+	background-size: 7px 7px;
+	text-shadow: 1px 1px 1px var(--shadow);
 
 	user-select: none;
 
 	::selection {
-		background-color: var(--selection-color);
+		background-color: var(--selection);
 	}
+}
+
+/*
+ * Element style: every anchor is underlined and turns into an inked block on
+ * hover. Add `not-underline-hover` to opt out (icons, media links).
+ */
+:where(a):not(.not-underline-hover) {
+	padding: 1.5px;
+	text-decoration-line: underline;
+	text-decoration-thickness: 0.1em;
+	text-underline-offset: 2px;
+	transition:
+		color 300ms ease-in-out,
+		background-color 300ms ease-in-out,
+		text-decoration-color 300ms ease-in-out;
+}
+
+@media (hover: hover) {
+	:where(a):not(.not-underline-hover):hover {
+		color: var(--paper);
+		background-color: var(--ink);
+		text-decoration-color: var(--ink);
+	}
+}
+
+/* Content typography, a small subset of the theme's prose styles. */
+.content {
+	line-height: 1.75;
+}
+
+.content h2 {
+	margin-bottom: 0.65rem;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--rule);
+	font-family: var(--font-header);
+	font-size: 1.0625rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+.content ul {
+	margin: 0;
+	padding-left: 1.35em;
+	list-style: disc;
+}
+
+.content li::marker {
+	font-size: 0.85em;
+	color: var(--ink-soft);
+}
+
+.content li + li {
+	margin-top: 0.4rem;
+}
+
+.content blockquote {
+	margin: 0;
+	padding-left: 1em;
+	border-left: 0.25em solid var(--rule);
+	color: var(--ink-soft);
+	font-style: italic;
+}
+
+.content code:not(pre code) {
+	padding: 2px 4px;
+	border-radius: 4px;
+	background-color: var(--code-paper);
+	color: var(--code-ink);
+	font-size: 90%;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.content hr {
+	border: 0;
+	border-top: 1px solid var(--rule);
+	margin: 2rem 0;
 }
