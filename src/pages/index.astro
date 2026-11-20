@@ -1,35 +1,88 @@
 ---
 import App from "$layouts/App.astro";
+
+const projects = [
+	{
+		name: "lps-community-guide",
+		description: "A wiki by Minecraft Transit Railway mod Let's Play Server China community.",
+		href: "https://github.com/mtrlps-community/lps-community-guide"
+	}
+];
+
+const posts = [
+	{
+		title: "使用 GitHub Action 备份 Artalk 数据至仓库",
+		href: "https://www.ooowl.net/posts/back-up-artalk-data-using-github/"
+	},
+	{ title: "从 Visual Studio Code 到 Zed", href: "https://www.ooowl.net/posts/vscode-to-zed/" },
+	{
+		title: "为 UptimeFlare 设置飞书通知",
+		href: "https://www.ooowl.net/posts/setup-lark-notification-for-uptimeflare/"
+	},
+	{ title: "我在用什么：2026", href: "https://www.ooowl.net/posts/what-im-using-2026/" },
+	{ title: "它很适合我 —— Mole 使用体验", href: "https://www.ooowl.net/posts/mole/" }
+];
 ---
 
 <App>
-	<div class="flex items-center justify-center h-[90vh]">
-		<div class="flex max-sm:flex-col sm:items-end gap-20 sm:gap-28 max-w-4xl w-full max-sm:mx-4">
-			<div class="flex flex-col items-center">
+	<div class="flex items-center justify-center min-h-[90vh] px-4 py-20">
+		<div class="flex max-sm:flex-col sm:items-center gap-20 sm:gap-28 max-w-4xl w-full">
+			<div class="flex flex-col items-center shrink-0">
 				<span class="w-42 h-42 rounded-full overflow-hidden">
 					<img src="/favicon.jpg" alt="Avatar" draggable="false" class="inline-block w-full h-full rounded-full object-cover" />
 				</span>
 
-				<strong class="flex gap-2 mt-10 text-xl font-serif tracking-widest select-text">
-					<ruby>五月七日<rp>（</rp><rt>つゆり</rt><rp>）</rp></ruby>
-					<ruby>千緒<rp>（</rp><rt>ちお</rt><rp>）</rp></ruby>
-				</strong>
+				<strong class="mt-10 text-xl font-serif tracking-widest select-text">fenychn0206</strong>
 
 				<div class="flex gap-10 mt-4 text-xl">
-					<a href="https://github.com/tuyuritio" target="_blank" aria-label="GitHub" title="Browse projects" class="inline-flex"><i class="iconify lucide--github"></i></a>
-					<a href={`mailto:i@57t.io`} aria-label="Email" title="Get in touch" class="inline-flex"><i class="iconify lucide--at-sign"></i></a>
-					<a href="https://ttio.cc" target="_blank" aria-label="Blog" title="Explore thoughts" class="inline-flex"><i class="iconify lucide--audio-waveform"></i></a>
+					<a href="https://github.com/fenychn0206" target="_blank" aria-label="GitHub" title="Browse projects" class="inline-flex"><i class="iconify lucide--github"></i></a>
+					<a href={`mailto:hey@ohdragonboi.cn`} aria-label="Email" title="Get in touch" class="inline-flex"><i class="iconify lucide--at-sign"></i></a>
+					<a href="https://blog.ohdragonboi.cn" target="_blank" aria-label="Blog" title="Explore thoughts" class="inline-flex"><i class="iconify lucide--audio-waveform"></i></a>
 				</div>
 			</div>
 
-			<article class="flex flex-col gap-12 mb-10 select-text">
+			<article class="flex flex-col gap-10 mb-10 select-text">
 				<div class="flex flex-col gap-4">
-					<p>Hi, I'm <strong><ruby>五月七日<rp>(</rp><rt>Tuyuri</rt><rp>)</rp></ruby><ruby>千緒<rp>(</rp><rt>Tio</rt><rp>)</rp></ruby></strong>. Just <strong>Tio</strong> is fine.</p>
-					<p>It’s hard to say that programming is my hobby, but I really enjoy the process of creating and solving things with code.</p>
+					<p>Hi, I'm <strong>Frederick Chen</strong>, known online as <strong>fenychn0206</strong>.</p>
 				</div>
+
 				<div class="text-selection">
-					<p>// Understanding asynchronously...</p>
+					<p>// Student / ex-OIer / Blogger / Developer / Rail Lover</p>
 				</div>
+
+				<section class="flex flex-col gap-3">
+					<h2 class="text-xs font-semibold tracking-[0.2em] uppercase text-secondary">Projects I've Worked On</h2>
+					<ul class="flex flex-col gap-2">
+						{projects.map((project) => (
+							<li>
+								<a href={project.href} target="_blank" rel="noreferrer" class="font-medium underline decoration-weak underline-offset-4 hover:decoration-primary">{project.name}</a>
+								<span class="text-secondary"> — {project.description}</span>
+							</li>
+						))}
+					</ul>
+				</section>
+
+				<section class="flex flex-col gap-3">
+					<h2 class="text-xs font-semibold tracking-[0.2em] uppercase text-secondary">Writing</h2>
+					<ul class="flex flex-col gap-2">
+						{posts.map((post) => (
+							<li class="flex gap-2">
+								<span class="text-weak">•</span>
+								<a href={post.href} target="_blank" rel="noreferrer" class="hover:underline decoration-weak underline-offset-4">{post.title}</a>
+							</li>
+						))}
+					</ul>
+					<a href="https://blog.ohdragonboi.cn" target="_blank" rel="noreferrer" class="self-start text-sm text-secondary hover:text-primary">Read More…</a>
+				</section>
+
+				<section class="flex flex-col gap-3">
+					<h2 class="text-xs font-semibold tracking-[0.2em] uppercase text-secondary">Sponsor Me</h2>
+					<p class="text-secondary">If my projects helped you, why not to buy a coffee to me?</p>
+					<a href="https://afdian.com/a/fenychn0206" target="_blank" rel="noreferrer" class="self-start inline-flex items-center gap-2 underline decoration-weak underline-offset-4 hover:decoration-primary">
+						<i class="iconify lucide--heart"></i>
+						<span>Afdian</span>
+					</a>
+				</section>
 			</article>
 		</div>
 	</div>
