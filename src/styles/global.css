@@ -200,7 +200,7 @@ html {
 /* The article sits directly under the nav, so trim the leading heading margin
    instead of letting the 1.75em heading margin stack on top of the nav. */
 .prose > :first-child {
-	margin-top: 0.75rem;
+	margin-top: 2rem;
 }
 
 /* Tailwind Typography ships a fixed grey palette. The site is monochrome, so

@@ -62,7 +62,7 @@ const navItems = [
 		</aside>
 
 		<div class="mt-12 min-w-0 lg:mt-0 lg:flex lg:h-full lg:min-h-0 lg:flex-col">
-			<nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold lg:pt-10">
+			<nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold lg:pt-10 lg:text-base">
 				{
 					navItems.map(item => (
 						<a class:list={["not-underline-hover border-b-2 pb-2.5", active === item.key ? "border-primary" : "border-transparent hover:border-primary/40"]} href={item.href} aria-current={active === item.key ? "page" : undefined}>
