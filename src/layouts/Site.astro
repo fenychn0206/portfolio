@@ -88,6 +88,13 @@ const navItems: NavItem[] = [
 
 			<div class="lg:min-h-0 lg:flex-1 lg:overflow-y-scroll lg:overscroll-contain scrollbar-hide">
 				<slot />
+
+				<footer class="mt-16 pb-8 text-xs leading-[1.5] font-bold">
+					<p>
+						© {new Date().getFullYear()} Frederick Chen. Powered by
+						<a href="https://astro.build/" target="_blank" rel="noreferrer">Astro</a>
+					</p>
+				</footer>
 			</div>
 		</div>
 	</main>
