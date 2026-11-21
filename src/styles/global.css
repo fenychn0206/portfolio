@@ -78,6 +78,22 @@
 	}
 }
 
+/* PJAX page transitions (ClientRouter): a short cross-fade between routes,
+   using the same easing curve as Astro's built-in animations. */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 200ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
+
 /* Base Elements */
 
 html {
