@@ -1,0 +1,41 @@
+---
+import { site } from "../config";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const { navLinks, socialLinks } = site;
+
+// Icon names must be static so Tailwind can discover them.
+const socialIcons: Record<string, string> = {
+	github: "i-[mdi--github]",
+	rss: "i-[mdi--rss]",
+	mail: "i-[mdi--email-outline]"
+};
+---
+
+<nav class="text-center font-bold flex flex-col gap-4">
+	<ul
+		class="text-xs leading-[1.5] sm:text-sm sm:leading-[1.5] flex flex-row gap-1.5 sm:gap-2 justify-center lg:flex-col lg:items-start lg:text-base"
+	>
+		{
+			navLinks.map((nav) => (
+				<li>
+					<a href={nav.href}>{nav.name}</a>
+				</li>
+			))
+		}
+	</ul>
+	<ul class="flex flex-row gap-1 justify-center">
+		<li>
+			<ThemeToggle />
+		</li>
+		{
+			socialLinks.map(({ href, name }) => (
+				<li>
+					<a href={href} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
+						<span class:list={[socialIcons[name] ?? "i-[mdi--link-variant]", "size-6"]}>{name}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>

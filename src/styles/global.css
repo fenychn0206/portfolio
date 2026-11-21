@@ -1,141 +1,326 @@
-@import "tailwindcss";
+/* Tailwind CSS entry point. */
+@import 'tailwindcss';
 
-@plugin "@iconify/tailwind4" {
-	prefixes: mdi;
+/* `.prose` comes from the official typography plugin. */
+@plugin '@tailwindcss/typography';
+
+/* Icons use Iconify's arbitrary-value syntax, e.g. `i-[mdi--github]`. */
+@plugin '@iconify/tailwind4' {
+	prefix: 'i';
+	scale: 1.2;
 }
+
+/* ThemeScript toggles the `dark` class on <html>; this keeps `dark:`
+   utilities class-based instead of following the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Fonts */
+
+/* Self-hosted on purpose: a third-party CDN would add DNS, handshake and TLS
+   work before the first code block can paint, and is often slow from mainland
+   China. Same-origin files are cached by the same CDN that serves the HTML. */
+@font-face {
+	font-family: 'Noto Sans Mono';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('/fonts/noto-sans-mono-latin-wght-normal.woff2?v=5.3.0') format('woff2-variations');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+		U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: 'Noto Sans Mono';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('/fonts/noto-sans-mono-latin-ext-wght-normal.woff2?v=5.3.0') format('woff2-variations');
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+		U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Design Tokens */
 
 @theme {
-	--color-primary: var(--ink);
-	--color-secondary: var(--ink-soft);
-	--color-weak: var(--rule);
-	--color-background: var(--paper);
-	--color-selection: var(--selection);
+	--color-primary: #2e405b;
+	--color-background: #ffffff;
 
-	--font-ui:
-		"Source Sans Pro", "Roboto", "Helvetica", "Helvetica Neue", "Source Han Sans SC",
-		"Source Han Sans TC", "PingFang SC", "PingFang HK", "PingFang TC", sans-serif;
-	--font-header:
-		"HiraMinProN-W6", "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif TC",
-		serif;
+	/* Filled action accent. Kept for parity with the blog, which uses it for
+	   the only coloured control on the site (the comment form button). */
+	--color-action: #1871c2;
+
+	--font-header: 'HiraMinProN-W6', 'Source Han Serif CN', 'Source Han Serif SC', 'Source Han Serif TC', serif;
+	--font-ui: 'Source Sans Pro', 'Roboto', 'Helvetica', 'Helvetica Neue', 'Source Han Sans SC', 'Source Han Sans TC',
+		'PingFang SC', 'PingFang HK', 'PingFang TC', sans-serif;
+	--font-code: 'Noto Sans Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+		'Courier New', monospace;
 }
 
-/* Palette adapted from astro-theme-typography: ink on paper, no pure black. */
+/* ThemeScript toggles the `dark` class on <html>; overriding the theme tokens
+   here flips every colour utility without needing `dark:` variants. */
+html.dark {
+	--color-primary: #ffffff;
+	--color-background: #232222;
+}
+
 :root {
-	--ink: #2e405b;
-	--ink-soft: #5b6b80;
-	--paper: #ffffff;
-	--rule: #dbe0e7;
-	--selection: #2e405b2e;
-	--shadow: #0000000a;
-	--code-ink: #c7254e;
-	--code-paper: #f9f2f4;
+	/* Let the browser add spacing between CJK and Latin/punctuation runs. */
+	text-autospace: normal;
+
+	/* Subtle grid and text shadow; readable on both themes. */
+	--grid-shadow-color: rgb(0 0 0 / 0.04);
+
+	/* Quote rule: a neutral grey, GitHub-like border. */
+	--quote-border: #d0d7de;
+
+	--code-muted: #6a737d;
+	--code-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--ink: #ffffff;
-		--ink-soft: #a5adb8;
-		--paper: #232222;
-		--rule: #3b3a3a;
-		--selection: #ffffff2e;
-		--shadow: #ffffff0a;
-		--code-ink: #ff9ab4;
-		--code-paper: #382c30;
-	}
+html.dark {
+	--grid-shadow-color: rgb(255 255 255 / 0.04);
+
+	--quote-border: #6e7681;
+
+	--code-muted: #757575;
+	--code-scheme: dark;
 }
+
+/* Base Elements */
 
 html {
-	font-family: var(--font-ui);
-	-webkit-font-smoothing: antialiased;
-	color: var(--ink);
-	background-color: var(--paper);
-	/* 7px paper grid, borrowing the theme's texture */
-	background-image:
-		linear-gradient(to right, var(--shadow) 1px, transparent 1px),
-		linear-gradient(to bottom, var(--shadow) 1px, transparent 1px);
+	@apply bg-background font-ui text-primary antialiased;
+
+	text-shadow: 1px 1px 1px var(--grid-shadow-color);
 	background-size: 7px 7px;
-	text-shadow: 1px 1px 1px var(--shadow);
-
-	user-select: none;
-
-	::selection {
-		background-color: var(--selection);
-	}
+	background-image: linear-gradient(to right, var(--grid-shadow-color) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--grid-shadow-color) 1px, transparent 1px);
 }
 
-/*
- * Element style: every anchor is underlined and turns into an inked block on
- * hover. Add `not-underline-hover` to opt out (icons, media links).
- */
 :where(a):not(.not-underline-hover) {
-	padding: 1.5px;
-	text-decoration-line: underline;
-	text-decoration-thickness: 0.1em;
-	text-underline-offset: 2px;
-	transition:
-		color 300ms ease-in-out,
-		background-color 300ms ease-in-out,
-		text-decoration-color 300ms ease-in-out;
+	@apply p-[1.5px] underline decoration-[0.1em] underline-offset-2 duration-300 ease-in-out;
 }
 
-@media (hover: hover) {
-	:where(a):not(.not-underline-hover):hover {
-		color: var(--paper);
-		background-color: var(--ink);
-		text-decoration-color: var(--ink);
+:where(a):not(.not-underline-hover):hover {
+	@apply bg-primary text-background decoration-primary;
+}
+
+/* Article titles share the same type scale everywhere. */
+@layer components {
+	.post-title {
+		margin: 0;
+		font-size: 1.25rem;
+		font-weight: 700;
+		line-height: 1.875rem;
 	}
 }
 
-/* Content typography, a small subset of the theme's prose styles. */
-.content {
-	line-height: 1.75;
+@layer utilities {
+	/* Tailwind Typography styles `h1` inside `.prose` with a larger scale, so
+	   match its selector strength for titles rendered inside article bodies. */
+	.prose .post-title {
+		margin: 0;
+		font-size: 1.25rem;
+		font-weight: 700;
+		line-height: 1.875rem;
+	}
+
+	/* Keep the theme's type scale and rhythm; these rules sit after the
+	   plugin's own utilities, so equal-specificity selectors replace its
+	   first/last-child margin resets. */
+	.prose :where(p, ul, ol) {
+		margin-block: 1em;
+		line-height: 1.75;
+	}
+
+	.prose :where(ul, ol) {
+		padding-inline-start: 1.25em;
+	}
+
+	.prose :where(li) {
+		margin-block: 0;
+		padding-inline-start: 0;
+		line-height: 1.75;
+	}
+
+	.prose :where(strong) {
+		font-weight: 700;
+	}
+
+	.prose :where(h1, h2, h3, h4, h5, h6) {
+		font-weight: 600;
+		line-height: 1.25;
+		scroll-margin-top: 1.5rem;
+	}
+
+	.prose :where(h1) {
+		margin-block: 1rem;
+		font-size: 2.25em;
+	}
+
+	.prose :where(h2) {
+		margin-block: 1.75em 0.5em;
+		font-size: 1.75em;
+	}
+
+	.prose :where(h3) {
+		margin-block: 1.5em 0.5em;
+		font-size: 1.375em;
+	}
+
+	.prose :where(h4) {
+		margin-block: 1em;
+		font-size: 1.125em;
+	}
+
+	/* Quotes use the same indent and rhythm as the blog's alert boxes, with a
+	   neutral grey rule and upright text. */
+	.prose :where(blockquote) {
+		margin-block: 1.5em;
+		padding: 0.25rem 0 0.25rem 1rem;
+		border-inline-start: 3px solid var(--quote-border);
+		font-style: normal;
+		font-weight: inherit;
+	}
+
+	.prose :where(blockquote) > :first-child {
+		margin-top: 0;
+	}
+
+	.prose :where(blockquote) > :last-child {
+		margin-bottom: 0;
+	}
+
+	.prose :where(blockquote)::before,
+	.prose :where(blockquote)::after,
+	.prose :where(blockquote) p:first-of-type::before,
+	.prose :where(blockquote) p:last-of-type::after {
+		content: none;
+	}
+
+	.prose :where(hr) {
+		margin-block: 2em;
+		border: 1px solid currentColor;
+	}
+
+	.prose :where(img, video) {
+		margin-block: 0;
+		max-width: 100%;
+	}
+
+	.prose :where(figure, picture) {
+		margin-block: 1em;
+	}
 }
 
-.content h2 {
-	margin-bottom: 0.65rem;
-	padding-bottom: 0.35rem;
-	border-bottom: 1px solid var(--rule);
-	font-family: var(--font-header);
-	font-size: 1.0625rem;
-	font-weight: 700;
-	letter-spacing: 0.02em;
+/* Hide the scrollbar while keeping the element scrollable. */
+@utility scrollbar-hide {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
-.content ul {
-	margin: 0;
-	padding-left: 1.35em;
-	list-style: disc;
+/* Tailwind Typography ships a fixed grey palette. The site is monochrome, so
+   let every prose element inherit the page colour instead. */
+.prose {
+	--tw-prose-body: currentColor;
+	--tw-prose-headings: currentColor;
+	--tw-prose-lead: currentColor;
+	--tw-prose-links: currentColor;
+	--tw-prose-bold: currentColor;
+	--tw-prose-counters: currentColor;
+	--tw-prose-bullets: currentColor;
+	--tw-prose-hr: currentColor;
+	--tw-prose-quotes: currentColor;
+	--tw-prose-quote-borders: currentColor;
+	--tw-prose-captions: currentColor;
+	--tw-prose-code: currentColor;
+	--tw-prose-pre-code: currentColor;
+	--tw-prose-pre-bg: transparent;
+	--tw-prose-th-borders: currentColor;
+	--tw-prose-td-borders: currentColor;
+	--tw-prose-kbd: currentColor;
+	--tw-prose-kbd-shadows: 0 0 0;
+
+	line-height: 1.5;
 }
 
-.content li::marker {
-	font-size: 0.85em;
-	color: var(--ink-soft);
+/* Markdown tweaks carried over from the blog's typography configuration. */
+html .prose :where(code)::before,
+html .prose :where(code)::after {
+	content: none;
 }
 
-.content li + li {
-	margin-top: 0.4rem;
-}
-
-.content blockquote {
-	margin: 0;
-	padding-left: 1em;
-	border-left: 0.25em solid var(--rule);
-	color: var(--ink-soft);
-	font-style: italic;
-}
-
-.content code:not(pre code) {
-	padding: 2px 4px;
-	border-radius: 4px;
-	background-color: var(--code-paper);
-	color: var(--code-ink);
-	font-size: 90%;
+html .prose :where(li) {
 	white-space: normal;
 	word-wrap: break-word;
 }
 
-.content hr {
-	border: 0;
-	border-top: 1px solid var(--rule);
-	margin: 2rem 0;
+/* Inline code, matching the blog's palette in both themes. */
+html code,
+html pre {
+	font-family: var(--font-code);
+	text-shadow: none;
+	text-autospace: no-autospace;
+}
+
+html .prose :where(:not(pre):not(a) > code) {
+	padding: 0.1em 0.35em;
+	border-radius: 0.375rem;
+	font-size: 0.9em;
+	font-weight: 400;
+	color: #c7254e;
+	background-color: #f9f2f4;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+html.dark .prose :where(:not(pre):not(a) > code) {
+	color: #e06c75;
+	background-color: #3a242a;
+}
+
+/* Page entrance */
+
+/* The intro animation must never hide the content: animating only `transform`
+   keeps the layout and paint identical from the first frame. The article column
+   is deliberately left out. */
+html.animation-prepared .transition-swup-header,
+html.animation-prepared .transition-swup-footer {
+	animation: page-intro-down 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (min-width: 1024px) {
+	html.animation-prepared .transition-swup-header,
+	html.animation-prepared .transition-swup-footer {
+		animation-name: page-intro-left;
+	}
+}
+
+@keyframes page-intro-down {
+	from {
+		transform: translateY(-0.75rem);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes page-intro-left {
+	from {
+		transform: translateX(0.75rem);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html.animation-prepared .transition-swup-header,
+	html.animation-prepared .transition-swup-footer {
+		animation: none;
+	}
 }

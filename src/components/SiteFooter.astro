@@ -1,0 +1,13 @@
+---
+import { site } from "../config";
+
+const year = new Date().getFullYear();
+
+const { website, author, footer } = site;
+
+function parseFooter(str: string) {
+	return str.replace(/%author/g, author).replace(/%website/g, website).replace(/%year/g, year.toString());
+}
+---
+
+{footer.map((str) => <p class="font-bold text-xs leading-[1.5]" set:html={parseFooter(str)} />)}
