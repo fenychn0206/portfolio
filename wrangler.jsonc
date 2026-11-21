@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
+  "name": "homepage",
+  "compatibility_date": "2026-11-21",
+  // This site is fully static: only the Astro build output is uploaded.
+  // Keeping an explicit config stops `wrangler deploy` from running
+  // framework auto-config (which would add @astrojs/cloudflare and break the build).
+  "assets": {
+    "directory": "./dist"
+  }
+}
