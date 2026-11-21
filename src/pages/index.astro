@@ -8,27 +8,18 @@ const projects = [
 		href: "https://github.com/mtrlps-community/lps-community-guide"
 	}
 ];
-
 ---
 
 <App>
-	<main
-		class="mx-auto w-full max-w-[900px] px-6 pt-10 pb-16 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:py-14"
-	>
+	<main class="mx-auto w-full max-w-[900px] px-6 pt-10 pb-16 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:py-14">
 		<aside class="flex flex-col items-start gap-3 lg:sticky lg:top-24 lg:self-start">
 			<picture>
 				<source srcset="/avatar-dark.jpeg" media="(prefers-color-scheme: dark)" />
-				<img
-					src="/avatar.jpeg"
-					alt="Avatar"
-					width="128"
-					height="128"
-					class="mb-2 size-32 rounded-full object-cover"
-				/>
+				<img src="/avatar.jpeg" alt="Avatar" width="128" height="128" class="mb-2 size-32 rounded-full object-cover" />
 			</picture>
 			<h1 class="font-header text-[1.75rem] leading-tight font-bold">Frederick Chen</h1>
-			<p class="text-sm opacity-60">@fenychn0206</p>
-			<p class="mt-1 text-sm font-bold">Student / ex-OIer / Blogger / Developer / Rail Lover</p>
+			<p class="text-sm">@fenychn0206</p>
+			<p class="mt-1 text-sm font-bold">Student / ex-OIer / Blogger / Developer / Metropolitan Transport Enthusiasts</p>
 
 			<ul class="mt-2 flex flex-col gap-1.5 text-sm">
 				<li class="flex items-center gap-2">
@@ -47,32 +38,20 @@ const projects = [
 					<i class="iconify mdi--github" aria-hidden="true"></i>
 					<a href="https://github.com/fenychn0206" target="_blank" rel="noreferrer">GitHub</a>
 				</li>
-				<li class="flex items-center gap-2">
-					<i class="iconify mdi--post-outline" aria-hidden="true"></i>
-					<a href="https://www.ooowl.net/" target="_blank" rel="noreferrer">ooowl.net</a>
-				</li>
 			</ul>
 		</aside>
 
 		<div class="mt-12 min-w-0 lg:mt-0">
 			<nav class="flex flex-wrap gap-x-6 gap-y-2 border-b border-primary/20 text-sm font-bold">
-				<a
-					class="not-underline-hover -mb-px border-b-2 border-primary pb-2.5"
-					href="/"
-					aria-current="page">About</a
-				>
-				<a
-					class="not-underline-hover -mb-px border-b-2 border-transparent pb-2.5 hover:border-primary/40"
-					href="https://www.ooowl.net/">Blog</a
-				>
+				<a class="not-underline-hover -mb-px border-b-2 border-primary pb-2.5" href="/" aria-current="page">About</a>
+				<a class="not-underline-hover -mb-px border-b-2 border-transparent pb-2.5 hover:border-primary/40" href="https://www.ooowl.net/">Blog</a>
 			</nav>
 
 			<article class="prose">
 				<section id="about" class="scroll-mt-24">
 					<h2>About Me</h2>
 					<p>
-						Hi, I'm <strong>Frederick Chen</strong>, known online as <strong>fenychn0206</strong>. 这里是我的
-						GitHub Pages 主页，日常写代码、写博客，也折腾轨道交通。
+						Hi, I'm <strong>Frederick Chen</strong>, known online as <strong>fenychn0206</strong>. 这里是我的 GitHub Pages 主页，日常写代码、写博客，也折腾轨道交通。
 					</p>
 					<blockquote>
 						<p>Student / ex-OIer / Blogger / Developer / Rail Lover</p>
@@ -83,13 +62,8 @@ const projects = [
 					<h2>Projects</h2>
 					<div class="not-prose grid gap-4 sm:grid-cols-2">
 						{
-							projects.map((project) => (
-								<a
-									href={project.href}
-									target="_blank"
-									rel="noreferrer"
-									class="not-underline-hover flex flex-col gap-1 rounded-xl border border-primary/25 p-5 duration-300 ease-in-out hover:bg-primary/5"
-								>
+							projects.map(project => (
+								<a href={project.href} target="_blank" rel="noreferrer" class="not-underline-hover flex flex-col gap-1 rounded-xl border border-primary/25 p-5 duration-300 ease-in-out hover:bg-primary/5">
 									<strong class="text-base font-bold">{project.name}</strong>
 									<span class="text-sm opacity-70">{project.description}</span>
 								</a>
@@ -100,9 +74,7 @@ const projects = [
 
 				<section id="sponsor" class="scroll-mt-24">
 					<h2>Sponsor Me</h2>
-					<p>
-						你的赞助对我非常重要，它可以帮助我维护我的项目和服务。如果我的项目对你有帮助，为什么不考虑赞助一下！
-					</p>
+					<p>你的赞助对我非常重要，它可以帮助我维护我的项目和服务。如果我的项目对你有帮助，为什么不考虑赞助一下！</p>
 					<p>
 						<a href="https://afdian.com/a/fenychn0206" target="_blank" rel="noreferrer">爱发电 / Afdian</a>
 					</p>
