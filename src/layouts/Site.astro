@@ -73,13 +73,7 @@ const navItems: NavItem[] = [
 			<nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold lg:pt-10 lg:text-base">
 				{
 					navItems.map(item => (
-						<a
-							class:list={["not-underline-hover border-b-2 pb-2.5", active === item.key ? "border-primary" : "border-transparent hover:border-primary/40"]}
-							href={item.href}
-							target={item.external ? "_blank" : undefined}
-							rel={item.external ? "noreferrer" : undefined}
-							aria-current={active === item.key ? "page" : undefined}
-						>
+						<a class:list={["not-underline-hover border-b-2 pb-2.5", active === item.key ? "border-primary" : "border-transparent hover:border-primary/40"]} href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined} aria-current={active === item.key ? "page" : undefined}>
 							{item.label}
 						</a>
 					))
@@ -89,7 +83,9 @@ const navItems: NavItem[] = [
 			<div class="lg:min-h-0 lg:flex-1 lg:overflow-y-scroll lg:overscroll-contain scrollbar-hide">
 				<slot />
 
-				<footer class="mt-16 pb-8 text-xs leading-[1.5] font-bold">
+				<hr class="mt-7.5 mb-5 border-primary/20" />
+
+				<footer class="pb-8 text-xs leading-[1.5] font-bold">
 					<p>
 						© {new Date().getFullYear()} Frederick Chen. Powered by
 						<a href="https://astro.build/" target="_blank" rel="noreferrer">Astro</a>
