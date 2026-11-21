@@ -16,13 +16,16 @@ const projects = [
 		class="mx-auto w-full max-w-[900px] px-6 pt-10 pb-16 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:py-14"
 	>
 		<aside class="flex flex-col items-start gap-3 lg:sticky lg:top-24 lg:self-start">
-			<img
-				src="/favicon.jpg"
-				alt="Avatar"
-				width="128"
-				height="128"
-				class="mb-2 size-32 rounded-full object-cover"
-			/>
+			<picture>
+				<source srcset="/avatar-dark.jpeg" media="(prefers-color-scheme: dark)" />
+				<img
+					src="/avatar.jpeg"
+					alt="Avatar"
+					width="128"
+					height="128"
+					class="mb-2 size-32 rounded-full object-cover"
+				/>
+			</picture>
 			<h1 class="font-header text-[1.75rem] leading-tight font-bold">Frederick Chen</h1>
 			<p class="text-sm opacity-60">@fenychn0206</p>
 			<p class="mt-1 text-sm font-bold">Student / ex-OIer / Blogger / Developer / Rail Lover</p>
