@@ -1,16 +1,30 @@
 ---
 title: About
-description: Frederick Chen（fenychn0206）的个人简介
 ---
 
-## About Me
+## Hello there!
 
-Hi, I'm **Frederick Chen**, known online as **fenychn0206**. 这里是我的 GitHub Pages 主页，日常写代码、写博客，也折腾轨道交通。
+This is Frederick Chen. I'm a high school student from China and a passionate creator. Fascinated by the workings of the world, algorithms and visual design.
 
-> Student / ex-OIer / Blogger / Developer / Rail Lover
+>  *Working on learning to accept this rotten world.*
 
-## Sponsor Me
+In my spare time, I like to try my hand at developing some interesting projects, and I sometimes jot down my thoughts on my [blog (in Chinese)](https://www.ooowl.net/).
 
-你的赞助对我非常重要，它可以帮助我维护我的项目和服务。如果我的项目对你有帮助，为什么不考虑赞助一下！
+At the same time, I enjoy exploring metropolitan transport systems. I also enjoy using the Minecraft mod [Minecraft Transit Railway](https://github.com/Minecraft-Transit-Railway/Minecraft-Transit-Railway) to build my dream public transport systems.
 
-[爱发电 / Afdian](https://afdian.com/a/fenychn0206)
+## Skills & Learning
+
+I don’t have any outstanding talents; with everything, I’m only ‘a bit’ good at it. Of course, I’ll carry on trying new things as well.
+
+- C++: For competitive programming (now retired)
+- Javascript / Typescript
+- Astro
+- Tailwind CSS
+- Currently studying: UI / UX design, Docker, Server Maintenance
+- …
+
+## Others
+
+Games: Minecraft, Terraria, Cities: Skylines
+
+Music: Punk, electronic, nu-metal, Mandarin pop, Cantonese pop
