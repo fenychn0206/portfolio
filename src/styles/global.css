@@ -45,7 +45,8 @@
 	/* Filled action accent, kept for parity with the blog. */
 	--color-action: #1871c2;
 
-	--font-header: 'HiraMinProN-W6', 'Source Han Serif CN', 'Source Han Serif SC', 'Source Han Serif TC', serif;
+	/* Headings use the UI sans stack as well; the serif display face is gone. */
+	--font-header: var(--font-ui);
 	--font-ui: 'Source Sans Pro', 'Roboto', 'Helvetica', 'Helvetica Neue', 'Source Han Sans SC', 'Source Han Sans TC',
 		'PingFang SC', 'PingFang HK', 'PingFang TC', sans-serif;
 	--font-code: 'Noto Sans Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
