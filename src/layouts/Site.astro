@@ -9,11 +9,19 @@ interface Props {
 
 const { active, title } = Astro.props;
 
-const navItems = [
+interface NavItem {
+	key: "about" | "projects" | "blog";
+	label: string;
+	href: string;
+	/** Opens in a new tab. */
+	external?: boolean;
+}
+
+const navItems: NavItem[] = [
 	{ key: "about", label: "About", href: "/" },
 	{ key: "projects", label: "Projects", href: "/projects" },
-	{ key: "blog", label: "Blog", href: "https://www.ooowl.net/" }
-] as const;
+	{ key: "blog", label: "Blog", href: "https://www.ooowl.net/", external: true }
+];
 ---
 
 <App title={title}>
@@ -65,7 +73,13 @@ const navItems = [
 			<nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold lg:pt-10 lg:text-base">
 				{
 					navItems.map(item => (
-						<a class:list={["not-underline-hover border-b-2 pb-2.5", active === item.key ? "border-primary" : "border-transparent hover:border-primary/40"]} href={item.href} aria-current={active === item.key ? "page" : undefined}>
+						<a
+							class:list={["not-underline-hover border-b-2 pb-2.5", active === item.key ? "border-primary" : "border-transparent hover:border-primary/40"]}
+							href={item.href}
+							target={item.external ? "_blank" : undefined}
+							rel={item.external ? "noreferrer" : undefined}
+							aria-current={active === item.key ? "page" : undefined}
+						>
 							{item.label}
 						</a>
 					))
