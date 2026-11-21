@@ -262,3 +262,14 @@ html .prose :where(:not(pre):not(a) > code) {
 		background-color: #3a242a;
 	}
 }
+
+/* Hide the scrollbar while keeping the element scrollable, so the desktop
+   content column does not read as a separate pane. */
+@utility scrollbar-hide {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}

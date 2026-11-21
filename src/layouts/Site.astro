@@ -61,7 +61,7 @@ const navItems = [
 			</ul>
 		</aside>
 
-		<div class="mt-12 min-w-0 lg:mt-0 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain">
+		<div class="mt-12 min-w-0 lg:mt-0 lg:flex lg:h-full lg:min-h-0 lg:flex-col">
 			<nav class="flex flex-wrap gap-x-6 gap-y-2 border-b border-primary/20 text-sm font-bold">
 				{
 					navItems.map(item => (
@@ -79,7 +79,9 @@ const navItems = [
 				}
 			</nav>
 
-			<slot />
+			<div class="lg:min-h-0 lg:flex-1 lg:overflow-y-scroll lg:overscroll-contain scrollbar-hide">
+				<slot />
+			</div>
 		</div>
 	</main>
 </App>
