@@ -1,13 +1,12 @@
 ---
+import { getEntry, render } from "astro:content";
 import App from "$layouts/App.astro";
 
-const projects = [
-	{
-		name: "lps-community-guide",
-		description: "A wiki by Minecraft Transit Railway mod Let's Play Server China community.",
-		href: "https://github.com/mtrlps-community/lps-community-guide"
-	}
-];
+const about = await getEntry("about", "about");
+if (!about) {
+	throw new Error("Missing content entry: src/content/about.md");
+}
+const { Content } = await render(about);
 ---
 
 <App>
@@ -62,37 +61,7 @@ const projects = [
 			</nav>
 
 			<article class="prose">
-				<section id="about" class="scroll-mt-24">
-					<h2>About Me</h2>
-					<p>
-						Hi, I'm <strong>Frederick Chen</strong>, known online as <strong>fenychn0206</strong>. 这里是我的 GitHub Pages 主页，日常写代码、写博客，也折腾轨道交通。
-					</p>
-					<blockquote>
-						<p>Student / ex-OIer / Blogger / Developer / Rail Lover</p>
-					</blockquote>
-				</section>
-
-				<section id="projects" class="scroll-mt-24">
-					<h2>Projects</h2>
-					<div class="not-prose grid gap-4 sm:grid-cols-2">
-						{
-							projects.map(project => (
-								<a href={project.href} target="_blank" rel="noreferrer" class="not-underline-hover flex flex-col gap-1 rounded-xl border border-primary/25 p-5 duration-300 ease-in-out hover:bg-primary/5">
-									<strong class="text-base font-bold">{project.name}</strong>
-									<span class="text-sm opacity-70">{project.description}</span>
-								</a>
-							))
-						}
-					</div>
-				</section>
-
-				<section id="sponsor" class="scroll-mt-24">
-					<h2>Sponsor Me</h2>
-					<p>你的赞助对我非常重要，它可以帮助我维护我的项目和服务。如果我的项目对你有帮助，为什么不考虑赞助一下！</p>
-					<p>
-						<a href="https://afdian.com/a/fenychn0206" target="_blank" rel="noreferrer">爱发电 / Afdian</a>
-					</p>
-				</section>
+				<Content />
 			</article>
 		</div>
 	</main>
