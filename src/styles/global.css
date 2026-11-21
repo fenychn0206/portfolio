@@ -93,6 +93,15 @@ html {
 	}
 }
 
+/* Anchor the paper grid to the viewport so it does not slide under the
+   content while scrolling. Desktop only: fixed backgrounds are known to
+   stutter and repaint badly on mobile browsers. */
+@media (min-width: 1024px) {
+	html {
+		background-attachment: fixed;
+	}
+}
+
 :where(a):not(.not-underline-hover) {
 	@apply p-[1.5px] underline decoration-[0.1em] underline-offset-2 duration-300 ease-in-out;
 }
