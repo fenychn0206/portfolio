@@ -1,23 +1,16 @@
 /* Tailwind CSS entry point. */
 @import 'tailwindcss';
 
-/* `.prose` comes from the official typography plugin. */
-@plugin '@tailwindcss/typography';
-
-/* Icons use Iconify's arbitrary-value syntax, e.g. `i-[mdi--github]`. */
+/* Icons use Iconify's `iconify` + `<prefix>--<name>` syntax, e.g. `mdi--github`. */
 @plugin '@iconify/tailwind4' {
-	prefix: 'i';
+	prefixes: mdi;
 	scale: 1.2;
 }
-
-/* ThemeScript toggles the `dark` class on <html>; this keeps `dark:`
-   utilities class-based instead of following the OS preference. */
-@custom-variant dark (&:where(.dark, .dark *));
 
 /* Fonts */
 
 /* Self-hosted on purpose: a third-party CDN would add DNS, handshake and TLS
-   work before the first code block can paint, and is often slow from mainland
+   work before the first code sample can paint, and is often slow from mainland
    China. Same-origin files are cached by the same CDN that serves the HTML. */
 @font-face {
 	font-family: 'Noto Sans Mono';
@@ -41,12 +34,12 @@
 
 /* Design Tokens */
 
+/* Values mirror the blog (www.ooowl.net) so both sites share one palette. */
 @theme {
 	--color-primary: #2e405b;
 	--color-background: #ffffff;
 
-	/* Filled action accent. Kept for parity with the blog, which uses it for
-	   the only coloured control on the site (the comment form button). */
+	/* Filled action accent, kept for parity with the blog. */
 	--color-action: #1871c2;
 
 	--font-header: 'HiraMinProN-W6', 'Source Han Serif CN', 'Source Han Serif SC', 'Source Han Serif TC', serif;
@@ -56,11 +49,11 @@
 		'Courier New', monospace;
 }
 
-/* ThemeScript toggles the `dark` class on <html>; overriding the theme tokens
-   here flips every colour utility without needing `dark:` variants. */
-html.dark {
-	--color-primary: #ffffff;
-	--color-background: #232222;
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-primary: #ffffff;
+		--color-background: #232222;
+	}
 }
 
 :root {
@@ -72,18 +65,13 @@ html.dark {
 
 	/* Quote rule: a neutral grey, GitHub-like border. */
 	--quote-border: #d0d7de;
-
-	--code-muted: #6a737d;
-	--code-scheme: light;
 }
 
-html.dark {
-	--grid-shadow-color: rgb(255 255 255 / 0.04);
-
-	--quote-border: #6e7681;
-
-	--code-muted: #757575;
-	--code-scheme: dark;
+@media (prefers-color-scheme: dark) {
+	:root {
+		--grid-shadow-color: rgb(255 255 255 / 0.04);
+		--quote-border: #6e7681;
+	}
 }
 
 /* Base Elements */
@@ -95,6 +83,12 @@ html {
 	background-size: 7px 7px;
 	background-image: linear-gradient(to right, var(--grid-shadow-color) 1px, transparent 1px),
 		linear-gradient(to bottom, var(--grid-shadow-color) 1px, transparent 1px);
+
+	user-select: none;
+
+	::selection {
+		background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
+	}
 }
 
 :where(a):not(.not-underline-hover) {
@@ -105,158 +99,67 @@ html {
 	@apply bg-primary text-background decoration-primary;
 }
 
-/* Article titles share the same type scale everywhere. */
-@layer components {
-	.post-title {
-		margin: 0;
-		font-size: 1.25rem;
-		font-weight: 700;
-		line-height: 1.875rem;
-	}
+/* Content typography: the blog's article type scale, applied to the card. */
+.content {
+	line-height: 1.75;
 }
 
-@layer utilities {
-	/* Tailwind Typography styles `h1` inside `.prose` with a larger scale, so
-	   match its selector strength for titles rendered inside article bodies. */
-	.prose .post-title {
-		margin: 0;
-		font-size: 1.25rem;
-		font-weight: 700;
-		line-height: 1.875rem;
-	}
-
-	/* Keep the theme's type scale and rhythm; these rules sit after the
-	   plugin's own utilities, so equal-specificity selectors replace its
-	   first/last-child margin resets. */
-	.prose :where(p, ul, ol) {
-		margin-block: 1em;
-		line-height: 1.75;
-	}
-
-	.prose :where(ul, ol) {
-		padding-inline-start: 1.25em;
-	}
-
-	.prose :where(li) {
-		margin-block: 0;
-		padding-inline-start: 0;
-		line-height: 1.75;
-	}
-
-	.prose :where(strong) {
-		font-weight: 700;
-	}
-
-	.prose :where(h1, h2, h3, h4, h5, h6) {
-		font-weight: 600;
-		line-height: 1.25;
-		scroll-margin-top: 1.5rem;
-	}
-
-	.prose :where(h1) {
-		margin-block: 1rem;
-		font-size: 2.25em;
-	}
-
-	.prose :where(h2) {
-		margin-block: 1.75em 0.5em;
-		font-size: 1.75em;
-	}
-
-	.prose :where(h3) {
-		margin-block: 1.5em 0.5em;
-		font-size: 1.375em;
-	}
-
-	.prose :where(h4) {
-		margin-block: 1em;
-		font-size: 1.125em;
-	}
-
-	/* Quotes use the same indent and rhythm as the blog's alert boxes, with a
-	   neutral grey rule and upright text. */
-	.prose :where(blockquote) {
-		margin-block: 1.5em;
-		padding: 0.25rem 0 0.25rem 1rem;
-		border-inline-start: 3px solid var(--quote-border);
-		font-style: normal;
-		font-weight: inherit;
-	}
-
-	.prose :where(blockquote) > :first-child {
-		margin-top: 0;
-	}
-
-	.prose :where(blockquote) > :last-child {
-		margin-bottom: 0;
-	}
-
-	.prose :where(blockquote)::before,
-	.prose :where(blockquote)::after,
-	.prose :where(blockquote) p:first-of-type::before,
-	.prose :where(blockquote) p:last-of-type::after {
-		content: none;
-	}
-
-	.prose :where(hr) {
-		margin-block: 2em;
-		border: 1px solid currentColor;
-	}
-
-	.prose :where(img, video) {
-		margin-block: 0;
-		max-width: 100%;
-	}
-
-	.prose :where(figure, picture) {
-		margin-block: 1em;
-	}
+.content h2 {
+	margin: 0 0 0.4em;
+	font-size: 1.75em;
+	font-weight: 600;
+	line-height: 1.25;
 }
 
-/* Hide the scrollbar while keeping the element scrollable. */
-@utility scrollbar-hide {
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
+.content h3 {
+	margin: 0 0 0.4em;
+	font-size: 1.375em;
+	font-weight: 600;
+	line-height: 1.25;
 }
 
-/* Tailwind Typography ships a fixed grey palette. The site is monochrome, so
-   let every prose element inherit the page colour instead. */
-.prose {
-	--tw-prose-body: currentColor;
-	--tw-prose-headings: currentColor;
-	--tw-prose-lead: currentColor;
-	--tw-prose-links: currentColor;
-	--tw-prose-bold: currentColor;
-	--tw-prose-counters: currentColor;
-	--tw-prose-bullets: currentColor;
-	--tw-prose-hr: currentColor;
-	--tw-prose-quotes: currentColor;
-	--tw-prose-quote-borders: currentColor;
-	--tw-prose-captions: currentColor;
-	--tw-prose-code: currentColor;
-	--tw-prose-pre-code: currentColor;
-	--tw-prose-pre-bg: transparent;
-	--tw-prose-th-borders: currentColor;
-	--tw-prose-td-borders: currentColor;
-	--tw-prose-kbd: currentColor;
-	--tw-prose-kbd-shadows: 0 0 0;
-
-	line-height: 1.5;
+.content p {
+	margin: 0;
+	line-height: 1.75;
 }
 
-/* Markdown tweaks carried over from the blog's typography configuration. */
-html .prose :where(code)::before,
-html .prose :where(code)::after {
-	content: none;
+.content p + p,
+.content ul + p,
+.content p + ul {
+	margin-top: 0.75em;
 }
 
-html .prose :where(li) {
+.content ul {
+	margin: 0;
+	padding-inline-start: 1.25em;
+	list-style: disc;
+}
+
+.content li {
+	line-height: 1.75;
 	white-space: normal;
 	word-wrap: break-word;
+}
+
+.content li + li {
+	margin-top: 0.25em;
+}
+
+.content li::marker {
+	color: currentColor;
+}
+
+/* Quotes: same indent, rule and rhythm as the blog's article quotes. */
+.content blockquote {
+	margin: 0;
+	padding: 0.25rem 0 0.25rem 1rem;
+	border-inline-start: 3px solid var(--quote-border);
+	font-style: normal;
+}
+
+.content hr {
+	margin-block: 2em;
+	border: 1px solid currentColor;
 }
 
 /* Inline code, matching the blog's palette in both themes. */
@@ -267,7 +170,7 @@ html pre {
 	text-autospace: no-autospace;
 }
 
-html .prose :where(:not(pre):not(a) > code) {
+html :where(:not(pre):not(a) > code) {
 	padding: 0.1em 0.35em;
 	border-radius: 0.375rem;
 	font-size: 0.9em;
@@ -278,49 +181,9 @@ html .prose :where(:not(pre):not(a) > code) {
 	word-wrap: break-word;
 }
 
-html.dark .prose :where(:not(pre):not(a) > code) {
-	color: #e06c75;
-	background-color: #3a242a;
-}
-
-/* Page entrance */
-
-/* The intro animation must never hide the content: animating only `transform`
-   keeps the layout and paint identical from the first frame. The article column
-   is deliberately left out. */
-html.animation-prepared .transition-swup-header,
-html.animation-prepared .transition-swup-footer {
-	animation: page-intro-down 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@media (min-width: 1024px) {
-	html.animation-prepared .transition-swup-header,
-	html.animation-prepared .transition-swup-footer {
-		animation-name: page-intro-left;
-	}
-}
-
-@keyframes page-intro-down {
-	from {
-		transform: translateY(-0.75rem);
-	}
-	to {
-		transform: translateY(0);
-	}
-}
-
-@keyframes page-intro-left {
-	from {
-		transform: translateX(0.75rem);
-	}
-	to {
-		transform: translateX(0);
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	html.animation-prepared .transition-swup-header,
-	html.animation-prepared .transition-swup-footer {
-		animation: none;
+@media (prefers-color-scheme: dark) {
+	html :where(:not(pre):not(a) > code) {
+		color: #e06c75;
+		background-color: #3a242a;
 	}
 }

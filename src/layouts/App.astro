@@ -1,59 +1,24 @@
 ---
 import "$styles/global.css";
-import { appearance, site } from "../config";
-import SiteFooter from "$components/SiteFooter.astro";
-import SiteNavigation from "$components/SiteNavigation.astro";
-import SiteTitle from "$components/SiteTitle.astro";
-import ThemeScript from "$components/ThemeScript.astro";
 
-const dark = appearance.theme === "dark";
+const title = "fenychn0206";
+const description = "Student / ex-OIer / Blogger / Developer / Rail Lover";
 ---
 
-<html lang="zh-CN" class:list={["animation-prepared", { dark }]}>
+<html lang="zh-CN">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={site.description} />
+		<meta name="description" content={description} />
+
 		<meta name="color-scheme" content="light dark" />
 
 		<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
 
-		<title>{site.title}</title>
-
-		<ThemeScript />
+		<title>{title}</title>
 	</head>
-
-	<body
-		class="h-[100vh] w-full max-w-[1200px] mx-auto p-7.5 lg:px-20 lg:py-0 lg:grid lg:gap-x-6 lg:grid-cols-[3fr_1fr] lg:grid-rows-[1fr_9rem]"
-	>
-		<header
-			class="transition-swup-header flex flex-col gap-2.5 m-7.5 lg:mx-0 lg:mt-20 lg:mb-4 lg:row-start-1 lg:row-end-2 lg:col-start-2 lg:col-end-3 lg:justify-between lg:items-start"
-		>
-			<SiteTitle />
-			<SiteNavigation />
-		</header>
-
-		<main
-			class="transition-swup-main overflow-y-scroll scrollbar-hide outline-none lg:row-start-1 lg:row-end-3 lg:col-start-1 lg:col-end-2 lg:py-20"
-		>
-			<slot />
-		</main>
-
-		<footer
-			class="transition-swup-footer py-7.5 max-lg:mx-auto max-lg:max-w-[65ch] lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-3"
-		>
-			<SiteFooter />
-		</footer>
-
-		<script is:inline>
-			// The intro animation is opt-in via `animation-prepared`; drop it as soon
-			// as the header/footer entrance has played so later paints are untouched.
-			document.addEventListener(
-				'animationend',
-				() => document.documentElement.classList.remove('animation-prepared'),
-				{ once: true }
-			)
-		</script>
+	<body>
+		<slot />
 	</body>
 </html>
