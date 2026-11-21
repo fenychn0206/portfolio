@@ -4,7 +4,7 @@ import Site from "$layouts/Site.astro";
 const projects = [
 	{
 		name: "lps-community-guide",
-		description: "A wiki by Minecraft Transit Railway mod Let's Play Server China community.",
+		description: "A wiki created by the MTR Let's Play Server player community. Dedicated to providing Chinese players with a better gaming experience.",
 		href: "https://github.com/mtrlps-community/lps-community-guide"
 	}
 ];
@@ -16,12 +16,7 @@ const projects = [
 		<div class="not-prose grid gap-4 sm:grid-cols-2">
 			{
 				projects.map(project => (
-					<a
-						href={project.href}
-						target="_blank"
-						rel="noreferrer"
-						class="not-underline-hover flex flex-col gap-1 rounded-xl border border-primary/25 p-5"
-					>
+					<a href={project.href} target="_blank" rel="noreferrer" class="not-underline-hover flex flex-col gap-1 rounded-xl border border-primary/25 p-5">
 						<strong class="text-base font-bold">{project.name}</strong>
 						<span class="text-sm opacity-70">{project.description}</span>
 					</a>
