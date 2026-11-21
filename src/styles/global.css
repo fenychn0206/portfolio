@@ -87,10 +87,6 @@ html {
 	background-size: 7px 7px;
 	background-image: linear-gradient(to right, var(--grid-shadow-color) 1px, transparent 1px),
 		linear-gradient(to bottom, var(--grid-shadow-color) 1px, transparent 1px);
-
-	::selection {
-		background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
-	}
 }
 
 /* Anchor the paper grid to the viewport so it does not slide under the
