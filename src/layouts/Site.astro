@@ -17,8 +17,8 @@ const navItems = [
 ---
 
 <App title={title}>
-	<main class="mx-auto w-full max-w-[900px] px-6 pt-10 pb-16 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:py-14">
-		<aside class="flex flex-col items-start gap-3 text-base lg:sticky lg:top-24 lg:self-start">
+	<main class="mx-auto w-full max-w-[900px] px-6 pt-10 pb-16 lg:grid lg:h-full lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:py-14">
+		<aside class="flex flex-col items-start gap-3 text-base lg:max-h-full lg:self-start lg:overflow-y-auto">
 			<picture>
 				<source srcset="/avatar-dark.jpeg" media="(prefers-color-scheme: dark)" />
 				<img src="/avatar.jpeg" alt="Avatar" width="128" height="128" class="mb-2 size-32 rounded-full object-cover" />
@@ -61,7 +61,7 @@ const navItems = [
 			</ul>
 		</aside>
 
-		<div class="mt-12 min-w-0 lg:mt-0">
+		<div class="mt-12 min-w-0 lg:mt-0 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain">
 			<nav class="flex flex-wrap gap-x-6 gap-y-2 border-b border-primary/20 text-sm font-bold">
 				{
 					navItems.map(item => (
