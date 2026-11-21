@@ -9,19 +9,6 @@ const projects = [
 	}
 ];
 
-const posts = [
-	{
-		title: "使用 GitHub Action 备份 Artalk 数据至仓库",
-		href: "https://www.ooowl.net/posts/back-up-artalk-data-using-github/"
-	},
-	{ title: "从 Visual Studio Code 到 Zed", href: "https://www.ooowl.net/posts/vscode-to-zed/" },
-	{
-		title: "为 UptimeFlare 设置飞书通知",
-		href: "https://www.ooowl.net/posts/setup-lark-notification-for-uptimeflare/"
-	},
-	{ title: "我在用什么：2026", href: "https://www.ooowl.net/posts/what-im-using-2026/" },
-	{ title: "它很适合我 —— Mole 使用体验", href: "https://www.ooowl.net/posts/mole/" }
-];
 ---
 
 <App>
@@ -73,10 +60,6 @@ const posts = [
 				>
 				<a
 					class="not-underline-hover -mb-px border-b-2 border-transparent pb-2.5 hover:border-primary/40"
-					href="#writing">Writing</a
-				>
-				<a
-					class="not-underline-hover -mb-px border-b-2 border-transparent pb-2.5 hover:border-primary/40"
 					href="#sponsor">Sponsor</a
 				>
 			</nav>
@@ -110,24 +93,6 @@ const posts = [
 							))
 						}
 					</div>
-				</section>
-
-				<section id="writing" class="scroll-mt-24">
-					<h2>Writing</h2>
-					<ul>
-						{
-							posts.map((post) => (
-								<li>
-									<a href={post.href} target="_blank" rel="noreferrer">
-										{post.title}
-									</a>
-								</li>
-							))
-						}
-					</ul>
-					<p>
-						<a href="https://www.ooowl.net/" target="_blank" rel="noreferrer">阅读更多…… / Read More…</a>
-					</p>
 				</section>
 
 				<section id="sponsor" class="scroll-mt-24">
