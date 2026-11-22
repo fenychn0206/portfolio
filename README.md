@@ -1,26 +1,6 @@
-## fenychn0206 [![wakatime](https://wakatime.com/badge/user/2ede9bd6-eef6-4f46-98ab-d682749d00e0.svg?style=flat-square)](https://wakatime.com/@2ede9bd6-eef6-4f46-98ab-d682749d00e0) <img align="right" src="https://s2.loli.net/2025/10/29/3kPYRQDGs7ZEmI4.jpg" width="30px">
+# [im.ooowl.net](https://im.ooowl.net)
 
-> Student / ex-OIer / Blogger / Developer / Rail Lover
+My personal portfolio. Build with [Astro](https://astro.build).
 
-##### 参与的项目 / Projects I've Worked On
-
-- [lps-community-guide](https://github.com/mtrlps-community/lps-community-guide): A wiki by Minecraft Transit Railway mod Let's Play Server China community.
-
-##### 博文推送 / Writing
-
-<!-- BLOG-POST-LIST:START -->
-- [使用 GitHub Action 备份 Artalk 数据至仓库](https://www.ooowl.net/posts/back-up-artalk-data-using-github/)
-- [从 Visual Studio Code 到 Zed](https://www.ooowl.net/posts/vscode-to-zed/)
-- [为 UptimeFlare 设置飞书通知](https://www.ooowl.net/posts/setup-lark-notification-for-uptimeflare/)
-- [我在用什么：2026](https://www.ooowl.net/posts/what-im-using-2026/)
-- [它很适合我 —— Mole 使用体验](https://www.ooowl.net/posts/mole/)
-<!-- BLOG-POST-LIST:END -->
-[阅读更多…… / Read More…](https://blog.ohdragonboi.cn)
-
-##### 赞助 / Sponsor Me
-
-你的赞助对我非常重要。它可以帮助我维护我的项目和服务。如果我的项目对你有帮助，为什么不考虑赞助一下！
-
-Your sponsorship means a lot to me. It can help me to maintenance my project and service. If my project helped you, why not to buy a coffee to me?
-
-[爱发电 / Afdian](https://afdian.com/a/fenychn0206)
+> Made with ❤️ by **Frederick Chen** ([@fenychn0206](https://github.com/fenychn0206)) | [Blog](https://www.ooowl.net) · [Twitter](https://x.com/fenychn0206) · [Sponsor(Afdian)](https://afdian.com/a/fenychn0206)
+> <br>Code is licensed under [MIT License](LICENSE) and docs are licensed under [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
