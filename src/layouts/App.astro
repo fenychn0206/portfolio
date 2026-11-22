@@ -22,13 +22,22 @@ const {
 
 		<meta name="color-scheme" content="light dark" />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" data-icon-light="/favicon.svg" data-icon-dark="/favicon-white.svg" />
-		<link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" data-icon-light="/favicon.ico" data-icon-dark="/favicon-white.ico" />
+		<!--
+			Two icon sets, one per colour scheme: a dark glyph on light paper and
+			a white one on dark paper. Chromium and Firefox honour the media
+			attribute on icon links, so the tab picks the right file while the
+			page is parsed, without waiting for JavaScript. WebKit ignores it,
+			so the script below also points every icon at the matching scheme.
+		-->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" data-icon-light="/favicon.svg" data-icon-dark="/favicon-white.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon-white.svg" media="(prefers-color-scheme: dark)" data-icon-light="/favicon.svg" data-icon-dark="/favicon-white.svg" />
+		<link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" media="(prefers-color-scheme: light)" data-icon-light="/favicon.ico" data-icon-dark="/favicon-white.ico" />
+		<link rel="icon" type="image/x-icon" sizes="any" href="/favicon-white.ico" media="(prefers-color-scheme: dark)" data-icon-light="/favicon.ico" data-icon-dark="/favicon-white.ico" />
 
 		<script is:inline>
-			// The icon pair follows the blog: a dark glyph on light paper, a white
-			// one on dark paper. Swapping happens before first paint so the tab
-			// never flashes the wrong colour.
+			// Fallback for browsers that ignore the media attribute on icon
+			// links. Runs before first paint so the tab never flashes the wrong
+			// colour, and again after every page transition replaces the head.
 			(() => {
 				const query = window.matchMedia("(prefers-color-scheme: dark)");
 				const apply = isDark => {
@@ -38,6 +47,7 @@ const {
 				};
 				apply(query.matches);
 				query.addEventListener("change", event => apply(event.matches));
+				document.addEventListener("astro:after-swap", () => apply(query.matches));
 			})();
 		</script>
 
