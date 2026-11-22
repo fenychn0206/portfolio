@@ -1,0 +1,9 @@
+---
+// Umami analytics. The tracker reads its configuration from the script tag and
+// patches history.pushState/replaceState, so navigations made by Astro's
+// ClientRouter are counted without any extra client-side code.
+const src = "https://umami.ohdragonboi.cn/analytics";
+const websiteId = "775558cc-2a87-4888-8903-477195dad196";
+---
+
+<script is:inline defer src={src} data-website-id={websiteId}></script>

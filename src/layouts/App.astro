@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Analytics from "$components/Analytics.astro";
 import "$styles/global.css";
 
 interface Props {
@@ -52,6 +53,8 @@ const {
 		</script>
 
 		<ClientRouter />
+
+		<Analytics />
 
 		<title>{title}</title>
 	</head>
